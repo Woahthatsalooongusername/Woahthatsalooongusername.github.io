@@ -13,7 +13,13 @@
                   <script>
                   const canvas = document.getElementById("canvas");
                   const ctx = canvas.getContext("2d");
-  
+		  
+                  //hair
+                  ctx.fillStyle = "black";
+                  ctx.beginPath();
+		  ctx.arc(400,225,120,0,Math.PI,90);
+                  ctx.fill();
+
                   //head
                   ctx.fillStyle = "#edcc89";
                   ctx.beginPath();
@@ -52,7 +58,9 @@
                   ctx.lineTo(470,600);
                   ctx.lineTo(330,600);
                   ctx.closePath();
-		  ctx.fill()
+		  ctx.fill();              
+		 
+		 
                   </script>
   
           </body> 
