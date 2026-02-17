@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>My Portrait</title>
+                   <style>
+                   canvas{
+                   border: black 1px solid;
+                   }
+                   </style>
+           </head>
+           <body>
+                  <canvas id="canvas" width="800" height="800"></canvas>
+                  <script>
+                  const canvas = document.getElementById("canvas");
+                  const ctx = canvas.getContext("2d");
+  
+                  //head
+                  ctx.fillStyle = "#edcc89";
+                  ctx.beginPath();
+                  ctx.arc(400,250,120,0,2*Math.PI);
+                  ctx.fill();
+
+		  //left eye
+		  ctx.beginPath();
+		  ctx.arc(350,210,20,0,2*Math.PI);
+		  ctx.stroke();
+
+		  //right eye
+		  ctx.beginPath();
+		  ctx.arc(450,210,20,0,2*Math.PI);
+		  ctx.stroke();
+
+		  ctx.beginPath();
+		  ctx.moveTo(350,310);
+		  ctx.quadraticCurveTo(400,340,450,310);
+		  ctx.stroke();
+                  </script>
+  
+          </body> 
+  </html>
+
