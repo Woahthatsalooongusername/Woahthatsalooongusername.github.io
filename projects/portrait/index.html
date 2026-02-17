@@ -30,10 +30,29 @@
 		  ctx.arc(450,210,20,0,2*Math.PI);
 		  ctx.stroke();
 
+		  //mouth
 		  ctx.beginPath();
 		  ctx.moveTo(350,310);
 		  ctx.quadraticCurveTo(400,340,450,310);
 		  ctx.stroke();
+
+		  //left arm
+		  ctx.fillStyle = "#a1bbc5";
+		  ctx.fillRect(230,370,100,280);
+
+		  //right arm
+		  ctx.fillStyle = "#a1bbc5";
+		  ctx.fillRect(470,370,100,280);
+
+		  //shirt
+                  ctx.fillStyle = "#373f42";
+                  ctx.beginPath();
+                  ctx.moveTo(280,370);
+                  ctx.lineTo(520,370);
+                  ctx.lineTo(470,600);
+                  ctx.lineTo(330,600);
+                  ctx.closePath();
+		  ctx.fill()
                   </script>
   
           </body> 
