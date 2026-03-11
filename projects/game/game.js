@@ -1,6 +1,6 @@
 let gameActive = true;
 let haveLadder = false;
-let haveKey = false;
+let haveCrowbar = false;
 let haveCheese = false;
 //-----------------------------------------------------
 function Bedroom() {
@@ -43,6 +43,16 @@ clear();
  //-----------------------------------------------------
 function Attic() {
 clear();
+
+if (haveLadder) {
+	print("\ncrowbar get");
+
+function processInput(input) {
+	haveCrowbar = "true";
+	Hallway();
+}
+waitForInput(processInput);
+}
     print("You tried to reach for the latch on the ceiling...");
     print("\nbut it was too high up. Maybe theres a ladder somewhere?");
     print("\nPress Enter to go back");
@@ -112,6 +122,7 @@ waitForInput(processInput);
 //-------------------------------------------------------
 function Kitchen() {
 clear();
+
 	print("\nYou are in the kitchen");
 	print("\nYou can go here:" +
 		"\n\tLivingRoom");
@@ -129,6 +140,17 @@ waitForInput(processInput);
 //------------------------------------------------------
 function Garage() { 
 clear();
+
+if (!haveLadder) { 
+	print("\nLadder get");
+
+function processInput(input) {
+	haveLadder = true;
+	Garage();
+}
+waitForInput(processInput);
+}
+
         print("\nYou are in the garage");
         print("\nYou can go here:" +
                 "\n\tLivingRoom");
