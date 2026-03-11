@@ -15,7 +15,7 @@ graph TD;
     Hallway-->Attic;
     Stairs-->Kitchen;
     Stairs-->LivingRoom;
-    Stairs-->Garage;
+    LivingRoom--->Garage;
     Stairs-->FrontDoor;
     FrontDoor-->Outside;
 ```

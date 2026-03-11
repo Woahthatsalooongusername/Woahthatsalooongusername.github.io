@@ -2,16 +2,10 @@ let gameActive = true;
 let haveLadder = false;
 let haveKey = false;
 let haveCheese = false;
-
-//Declare your other global variables here
-
-
-//If you need, add any "helper" functions here
-
-
-//Make one function for each location
+//-----------------------------------------------------
 function Bedroom() {
-    print("\nYou are in bedroom!");
+clear();
+    print("\nYou are in the bedroom!");
     print("\nWhere do you want to go next? Say one of these choices:" +
         "\n\tHallway");
     
@@ -25,17 +19,20 @@ function Bedroom() {
     }
     waitForInput(processInput);
 }
-
+//-----------------------------------------------------
 function Hallway() {
-    print("\nYou are in Hallway!");
+clear();
+    print("\nYou are in the Hallway!");
     print("\nWhere do you want to go next? Say one of these choices:" +
-        "\n\tBedroom\n\tBathroom");
-    
+        "\n\tBedroom\n\tStairs\n\tBathroom");
+
     function processInput(input){
         if (input.toLowerCase() === "bedroom") {
             Bedroom();
 	} else if (input.toLowerCase() === "bathroom") {
 		Bathroom();
+	} else if (input.toLowerCase() === "stairs") {
+		Stairs();
         } else {
             stayHere();
             waitThenCall(Hallway);
@@ -43,16 +40,16 @@ function Hallway() {
     }   
     waitForInput(processInput);
 }
-
+ //-----------------------------------------------------
 function Bathroom() {
-
-	print("\nbathroom");
+clear();
+	print("\nyou are in the bathroom");
 	print("\nyou can go here:" +
 	    "\n\tHallway");
 
 function processInput(input){
-	if (input.toLowerCase() === "bathroom") {
-	    Bathroom();
+	if (input.toLowerCase() === "hallway") {
+	    Hallway();
 	} else {
 	    stayHere();
 	    waitThenCall(Bathroom);
@@ -60,17 +57,83 @@ function processInput(input){
     }
     waitForInput(processInput);
 }
+ //-----------------------------------------------------
+function Stairs() {
+clear();
+	print("\nYou took the stairs");
+	print("\ngo here:" +
+		"\n\tHallway\n\tLivingRoom");
 
+function processInput(input){
+	if (input.toLowerCase() === "hallway") {
+		Hallway();
+	} else if (input.toLowerCase() === "livingroom") {
+		LivingRoom();
+	} else {
+		stayHere();
+		waitThenCall(Stairs);
+	}
+}
+waitForInput(processInput);
+}
+//-------------------------------------------------------
+function LivingRoom() {
+clear();
+	print("\nYou are in the living room");
+	print("\nHere are your options:" +
+		"\n\tStairs\n\tKitchen\n\tGarage");
 
+function processInput(input){
+	if (input.toLowerCase() === "stairs") {
+		Stairs();
+	} else if (input.toLowerCase() === "kitchen") {
+		Kitchen();
+	} else if (input.toLowerCase() === "garage") {
+		Garage();
+	} else {
+		stayHere();
+		waitThenCall(LivingRoom);
+	}
+}
+waitForInput(processInput);
+}
+//-------------------------------------------------------
+function Kitchen() {
+clear();
+	print("\nYou are in the kitchen");
+	print("\nYou can go here:" +
+		"\n\tLivingRoom");
 
+function processInput(input){
+	if (input.toLowerCase() === "livingroom") {
+		LivingRoom();
+	} else {
+		stayHere();
+		waitThenCall(Kitchen);
+	}
+}
+waitForInput(processInput);
+}
+//------------------------------------------------------
+function Garage() { 
+clear();
+        print("\nYou are in the garage");
+        print("\nYou can go here:" +
+                "\n\tLivingRoom");
 
-
-
-//finally, make sure you customize this to tell it what should happen at the
-//very start. For this simple example, any input will bring you
-//to locationA
+function processInput(input){ 
+        if (input.toLowerCase() === "livingroom") {
+                LivingRoom();
+ 	} else {
+                stayHere();
+                waitThenCall(Garage);
+        }
+   } 
+   waitForInput(processInput);
+}
+ //-----------------------------------------------------
 function start(){	
-    print("placeholder start");
+   print("placeholder start");
 
     function processInput(input) {
             Bedroom();
