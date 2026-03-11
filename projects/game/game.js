@@ -10,21 +10,18 @@ clear();
         "\n\tHallway");
     
     function processInput(input){
-        if (input.toLowerCase() === "hallway") {
-            Hallway();
-        } else {
-            stayHere();
-            waitThenCall(Bedroom);
-        }
+	    Hallway();
     }
     waitForInput(processInput);
 }
 //-----------------------------------------------------
+
+//----------------------------------------------------
 function Hallway() {
 clear();
     print("\nYou are in the Hallway!");
     print("\nWhere do you want to go next? Say one of these choices:" +
-        "\n\tBedroom\n\tStairs\n\tBathroom");
+        "\n\tBedroom\n\tBathroom\n\tAttic\n\tStairs");
 
     function processInput(input){
         if (input.toLowerCase() === "bedroom") {
@@ -33,6 +30,9 @@ clear();
 		Bathroom();
 	} else if (input.toLowerCase() === "stairs") {
 		Stairs();
+	} else if (input.toLowerCase() === "attic") {
+		Attic();
+			
         } else {
             stayHere();
             waitThenCall(Hallway);
@@ -41,6 +41,18 @@ clear();
     waitForInput(processInput);
 }
  //-----------------------------------------------------
+function Attic() {
+clear();
+    print("You tried to reach for the latch on the ceiling...");
+    print("\nbut it was too high up. Maybe theres a ladder somewhere?");
+    print("\nPress Enter to go back");
+
+	function processInput(input){
+		Hallway();
+    }
+	waitForInput(processInput);
+}
+//---------------------------------------------------------
 function Bathroom() {
 clear();
 	print("\nyou are in the bathroom");
@@ -62,7 +74,7 @@ function Stairs() {
 clear();
 	print("\nYou took the stairs");
 	print("\ngo here:" +
-		"\n\tHallway\n\tLivingRoom");
+		"\n\tLivingRoom  <----  leads to 1st floor\n\tHallway  <----  leads to 2nd floor");
 
 function processInput(input){
 	if (input.toLowerCase() === "hallway") {
