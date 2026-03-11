@@ -8,16 +8,13 @@ The game takes place in the player's house.
 
 ```mermaid
 graph TD;
-    Closet-->YourRoom;
     YourRoom(((YourRoom)))-->Hallway;
     Hallway-->Bathroom;
     Hallway-->Stairs;
     Hallway-->Attic;
-    Stairs-->Kitchen;
     Stairs-->LivingRoom;
     LivingRoom--->Garage;
-    Stairs-->FrontDoor;
-    FrontDoor-->Outside;
+    LivingRoom--->Kitchen;
 ```
 
 The player starts in their room.
@@ -25,10 +22,7 @@ The player starts in their room.
 ## Story
 
 Your pet mouse is hungry.
-find the cheese before and give it to them before they get upset.
-
-You have 20 moves before your time runs out
-
+find the cheese and give it to your mouse
 ## Global Variables
 
 my global variables  are
