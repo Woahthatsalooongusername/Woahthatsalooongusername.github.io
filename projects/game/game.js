@@ -46,13 +46,15 @@ clear();
 
 if (haveLadder) {
 	print("\ncrowbar get");
-
+	print("\nPress Enter to go back");
 function processInput(input) {
 	haveCrowbar = "true";
 	Hallway();
 }
 waitForInput(processInput);
 }
+
+if (!haveLadder) {
     print("You tried to reach for the latch on the ceiling...");
     print("\nbut it was too high up. Maybe theres a ladder somewhere?");
     print("\nPress Enter to go back");
@@ -61,6 +63,7 @@ waitForInput(processInput);
 		Hallway();
     }
 	waitForInput(processInput);
+}
 }
 //---------------------------------------------------------
 function Bathroom() {
@@ -143,14 +146,21 @@ clear();
 
 if (!haveLadder) { 
 	print("\nLadder get");
-
+	print("\nYou can go here:" +
+		"\n\tLivingRoom");
 function processInput(input) {
 	haveLadder = true;
-	Garage();
+	if (input.toLowerCase() === "livingroom") {
+		LivingRoom();
+	} else {
+		stayHere();
+		waitThenCall(Garage);
+	}
 }
 waitForInput(processInput);
 }
 
+if (haveLadder) {
         print("\nYou are in the garage");
         print("\nYou can go here:" +
                 "\n\tLivingRoom");
@@ -164,6 +174,7 @@ function processInput(input){
         }
    } 
    waitForInput(processInput);
+}
 }
  //-----------------------------------------------------
 function start(){	
