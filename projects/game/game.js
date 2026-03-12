@@ -3,16 +3,27 @@ let haveLadder = false;
 let haveCrowbar = false;
 let haveCheese = false;
 //-----------------------------------------------------
-function Bedroom() {
+function Bedroom() { 
 clear();
-    print("\nYou are in the bedroom!");
-    print("\nWhere do you want to go next? Say one of these choices:" +
-        "\n\tHallway");
-    
-    function processInput(input){
-	    Hallway();
-    }
-    waitForInput(processInput);
+if (!haveCheese) {
+           print("\nyou are in the bedroom");
+           print("\nyou can go here:" +
+               "\n\tHallway");
+   
+   function processInput(input){ 
+           if (input.toLowerCase() === "hallway") {
+               Hallway();
+           } else { 
+               stayHere();
+              waitThenCall(Bedroom);
+           } 
+       } 
+       waitForInput(processInput);
+}
+
+if (haveCheese) {
+	print("\nYOU WIN!");
+}
 }
 //-----------------------------------------------------
 
@@ -44,11 +55,20 @@ clear();
 function Attic() {
 clear();
 
-if (haveLadder) {
+if (haveLadder && haveCrowbar) {
+	print("\ntheres nothing of value up here anymore");
+	print("\nPress Enter to go back");
+function processInput(input) {
+	Hallway();
+}
+waitForInput(processInput);
+}
+
+if (haveLadder && !haveCrowbar) {
 	print("\ncrowbar get");
 	print("\nPress Enter to go back");
 function processInput(input) {
-	haveCrowbar = "true";
+	haveCrowbar = true;
 	Hallway();
 }
 waitForInput(processInput);
@@ -125,7 +145,7 @@ waitForInput(processInput);
 //-------------------------------------------------------
 function Kitchen() {
 clear();
-
+if (!haveCrowbar) {
 	print("\nYou are in the kitchen");
 	print("\nYou can go here:" +
 		"\n\tLivingRoom");
@@ -139,6 +159,24 @@ function processInput(input){
 	}
 }
 waitForInput(processInput);
+}
+
+if (haveCrowbar){ 
+	print("\nCheese get");
+	print("\nYou can go here:" +
+		"\n\tLivingRoom");
+
+function processInput(input){
+	haveCheese = true;
+	if (input.toLowerCase() === "livingroom") {
+		LivingRoom();
+		 } else {
+			 stayHere();
+			 waitThenCall(Kitchen);
+		}
+}
+waitForInput(processInput);
+}
 }
 //------------------------------------------------------
 function Garage() { 
