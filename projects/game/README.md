@@ -1,32 +1,32 @@
-# Find The Cheese
+# Find The Spellbook
 
 ## Setting
 
-The game takes place in the player's house. 
+The game takes place in a magic library. There are some guards around whom the player must avoid 
 
 ## Map
 
 ```mermaid
 graph TD;
-    YourRoom(((YourRoom)))-->Hallway;
-    Hallway-->Bathroom;
-    Hallway-->Stairs;
-    Hallway-->Attic;
-    Stairs-->LivingRoom;
-    LivingRoom--->Garage;
-    LivingRoom--->Kitchen;
+    Outside(((Outside)))-->Frontdesk;
+    Frontdesk-->Bookshelves;
+    Frontdesk-->Meetingroom
+    Bookshelves-->Computerlab;
+    Bookshelves-->StaffOnlyDoor;
+    StaffOnlyDoor-->HeadLibrarian'sOffice;
+    StaffOnlyDoor-->Janitor'sCloset;
 ```
 
-The player starts in their room.
+The player starts outside
 
 ## Story
 
-Your pet mouse is hungry.
-find the cheese and give it to your mouse
+You are a theif, looking for the librarian's spellbook to help you steal from more people
+find it and escape
 ## Global Variables
 
 my global variables  are
-`haveCheese`,`haveLadder`, and `haveKey`
+`haveKey` and `canBreakSeals` 
 
 each of these are important because you will need to have these items in order
 to continue the story.
