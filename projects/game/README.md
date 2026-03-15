@@ -26,7 +26,7 @@ find it and escape
 ## Global Variables
 
 my global variables  are
-`haveKey` and `canBreakSeals` 
+`haveMasterKey` and `canBreakSeals` 
 
 each of these are important because you will need to have these items in order
 to continue the story.

@@ -1,49 +1,41 @@
 let gameActive = true;
-let haveLadder = false;
-let haveCrowbar = false;
-let haveCheese = false;
+let haveMK = false;
+let canBreakSeals = false;
+let haveSB = false;
 //-----------------------------------------------------
-function Bedroom() { 
+function Outside() { 
 clear();
-if (!haveCheese) {
-           print("\nyou are in the bedroom");
+           print("\nloc: outside");
            print("\nyou can go here:" +
-               "\n\tHallway");
+               "\n\tFrontdesk");
    
    function processInput(input){ 
-           if (input.toLowerCase() === "hallway") {
-               Hallway();
+           if (input.toLowerCase() === "frontdesk") {
+               Frontdesk();
            } else { 
                stayHere();
-              waitThenCall(Bedroom);
+              waitThenCall(Outside);
            } 
        } 
        waitForInput(processInput);
 }
 
-if (haveCheese) {
-	print("\nYOU WIN!");
-}
-}
 //-----------------------------------------------------
 
 //----------------------------------------------------
-function Hallway() {
+function Frontdesk() {
 clear();
-    print("\nYou are in the Hallway!");
+    print("\nloc: frontdesk");
     print("\nWhere do you want to go next? Say one of these choices:" +
-        "\n\tBedroom\n\tBathroom\n\tAttic\n\tStairs");
+        "\n\tBookshelves\n\tMeetingroom\n\tOutside");
 
     function processInput(input){
-        if (input.toLowerCase() === "bedroom") {
-            Bedroom();
-	} else if (input.toLowerCase() === "bathroom") {
-		Bathroom();
-	} else if (input.toLowerCase() === "stairs") {
-		Stairs();
-	} else if (input.toLowerCase() === "attic") {
-		Attic();
-			
+        if (input.toLowerCase() === "bookshelves") {
+            Bookshelves();
+	} else if (input.toLowerCase() === "meetingroom") {
+		Meetingroom();			
+	} else if (input.toLowerCase() === "outside") {
+		Outside();
         } else {
             stayHere();
             waitThenCall(Hallway);
@@ -52,56 +44,39 @@ clear();
     waitForInput(processInput);
 }
  //-----------------------------------------------------
-function Attic() {
+function Meetingroom() {
 clear();
 
-if (haveLadder && haveCrowbar) {
-	print("\ntheres nothing of value up here anymore");
+	print("\nloc: meetingroom");
 	print("\nPress Enter to go back");
 function processInput(input) {
-	Hallway();
+	Frontdesk();
 }
 waitForInput(processInput);
 }
 
-if (haveLadder && !haveCrowbar) {
-	print("\ncrowbar get");
-	print("\nPress Enter to go back");
-function processInput(input) {
-	haveCrowbar = true;
-	Hallway();
-}
-waitForInput(processInput);
-}
 
-if (!haveLadder) {
-    print("You tried to reach for the latch on the ceiling...");
-    print("\nbut it was too high up. Maybe theres a ladder somewhere?");
-    print("\nPress Enter to go back");
 
-	function processInput(input){
-		Hallway();
-    }
-	waitForInput(processInput);
-}
-}
 //---------------------------------------------------------
-function Bathroom() {
+function Bookshelves() {
 clear();
-	print("\nyou are in the bathroom");
+	print("\nloc: bookshelves");
 	print("\nyou can go here:" +
-	    "\n\tHallway");
+	    "\n\tComputerlab\n\tStaffonlydoor");
 
 function processInput(input){
-	if (input.toLowerCase() === "hallway") {
-	    Hallway();
+	if (input.toLowerCase() === "computerlab") {
+	    Computerlab();
+	} else if (input.toLowerCase() === "staffonlydoor") {
+	    Staffonlydoor();
 	} else {
 	    stayHere();
-	    waitThenCall(Bathroom);
+	    waitThenCall(Bookshelves);
 	}
     }
     waitForInput(processInput);
 }
+/*
  //-----------------------------------------------------
 function Stairs() {
 clear();
@@ -214,12 +189,13 @@ function processInput(input){
    waitForInput(processInput);
 }
 }
+*/
  //-----------------------------------------------------
 function start(){	
    print("placeholder start");
 
     function processInput(input) {
-            Bedroom();
+            Outside();
     }
     waitForInput(processInput);
 }
