@@ -9,11 +9,11 @@ clear();
 
 if (!haveSB) { 
            print("\nloc: outside");
-           print("\nType the corresponding number to move:" +
-               "\n\tA ~ Frontdesk");
+           print("\nType the corresponding acronym to move:" +
+               "\n\tFD ~ Frontdesk");
    
    function processInput(input){ 
-           if (input.toLowerCase() === "a") {
+           if (input.toLowerCase() === "fd") {
                Frontdesk();
            } else { 
                stayHere();
@@ -34,14 +34,14 @@ function Frontdesk() {
 clear();
     print("\nloc: frontdesk");
     print("\nWhere do you want to go next? Say one of these choices:" +
-        "\n\tA ~ Outside\n\tB ~ Meetingroom\n\tC ~ Bookshelves");
+        "\n\tO ~ Outside\n\tSR ~ Storageroom\n\tBS ~ Bookshelves");
 
     function processInput(input){
-        if (input.toLowerCase() === "a") {
+        if (input.toLowerCase() === "bs") {
             Bookshelves();
-	} else if (input.toLowerCase() === "b") {
-		Meetingroom();			
-	} else if (input.toLowerCase() === "c") {
+	} else if (input.toLowerCase() === "sr") {
+		Storageroom();			
+	} else if (input.toLowerCase() === "o") {
 		Outside();
         } else {
             stayHere();
@@ -51,40 +51,83 @@ clear();
     waitForInput(processInput);
 }
  //-----------------------------------------------------
-function Meetingroom() {
+function Storageroom() {
 clear();
 
-        print("\nYou are in the meetingroom");
-        print("\npress enter to leave");
+if (!brokeLockpick && !haveMK) {
+        print("\nYou try to open the storage room. it is locked.");
+        print("\nuse lockpick?");
+	print("\n\ttype Yes or No");
 
 function processInput(input){ 
-        if (input.toLowerCase() === "a") {
+        if (input.toLowerCase() === "yes") {
 		brokeLockpick = "true";
-		
-			Frontdesk();
+		print("it broke");
+		setTimeout(function() {
+		Frontdesk();
+		},3000);
+	} else if (input.toLowerCase() === "no") {
+		print("You walk away to find another way in");
+		setTimeout(function() {
+		Frontdesk();
+		},3000);
+	} else { 
+		stayHere();
+		waitThenCall(Storageroom);
+	}
 
 } 
 waitForInput(processInput);
-} 
 }
 
+if (brokeLockpick && !haveMK) {
+	print("\nYou try to open the door again, but it's still locked.");
+	print("\nPress enter to go back");
 
+function processInput(input){ 
+		Frontdesk();
+}
+waitForInput(processInput);
+}
 
+if (!brokeLockpick && haveMK) {
+	print("\nYou use the master key and door unlocks");
+	print("\nput story here. also you can break seals now");
+	print("\npress enter to leave");
 
+function processInput(input){
+	canBreakSeals = "true";
+		Frontdesk();
+}
+waitForInput(processInput);
+}
+
+if (brokeLockpick && haveMK) { 
+	print("\nYou use the master key and door unlocks");
+	print("\nif only you found this before breaking your lockpick. also you can break seals now");
+	print("\npress enter to leave");
+
+function processInput(input){ 
+	canBreakSeals = "true";
+		Frontdesk();
+}
+waitForInput(processInput);
+}
+}
 
 //---------------------------------------------------------
 function Bookshelves() {
 clear();
 	print("\nloc: bookshelves");
 	print("\nyou can go here:" +
-	    "\n\tA ~ Frontdesk\n\tB ~ Staffonlydoor\n\tC ~ Computerlab");
+	    "\n\tFD ~ Frontdesk\n\tSOD ~ Staffonlydoor\n\tCL ~ Computerlab");
 
 function processInput(input){
-	if (input.toLowerCase() === "c") {
+	if (input.toLowerCase() === "cl") {
 	    Computerlab();
-	} else if (input.toLowerCase() === "b") {
+	} else if (input.toLowerCase() === "sod") {
 	    Staffonlydoor();
-	} else if (input.toLowerCase() === "a") {
+	} else if (input.toLowerCase() === "fd") {
 	    Frontdesk();
 	} else {
 	    stayHere();
@@ -97,25 +140,24 @@ function processInput(input){
  //-----------------------------------------------------
 function Computerlab() {
 clear();
-
+	print("\nloc computerlab");
+	print("\nYou walk inside and see guard fast asleep at a desk.");
 if (!haveMK) {
-	print("\nloc computerlab");
-	print("\nYou found the master key");
-	print("\npress enter to go back");
-}
-if (haveMK){
-	print("\nloc computerlab");
-	print("\nYou already have the master key");
-	print("\npress enter to go back");
+	print("\nHanging by their waist, You see a fat-looking key chain with keys of varying colors on it. it is labeled `Master Key`");
+	print("\nYou carefully take it without waking the guard up");
+	print("\nPress enter to go back");
 }
 
-    function processInput(input) {
+if (haveMK) {
+	print("\nThere isnt much to do here now that you have the master key");
+	print("\nPress enter to go back");
+}
+function processInput(input) {
 	haveMK = "true";
-        Bookshelves();
+	Bookshelves();
 }
 waitForInput(processInput);
 }
-
 
 
 //-------------------------------------------------------
@@ -123,15 +165,15 @@ function Staffonlydoor() {
 clear();
 	print("\nloc: staffonlydoor");
 	print("\nHere are your options:" +
-		"\n\tA ~ Bookshelves\n\tB ~ Head librarian's office\n\tC ~ Storageroom");
+		"\n\tBS ~ Bookshelves\n\tHLO ~ Head librarian's office\n\tJC ~ Janitor's Closet");
 
 function processInput(input){
-	if (input.toLowerCase() === "a") {
+	if (input.toLowerCase() === "bs") {
 		Bookshelves();
-	} else if (input.toLowerCase() === "b") {
+	} else if (input.toLowerCase() === "hlo") {
 		Headlibrariansoffice();
-	} else if (input.toLowerCase() === "c") {
-		Storageroom();
+	} else if (input.toLowerCase() === "jc") {
+		JanitorCloset();
 	} else {
 		stayHere();
 		waitThenCall(Staffonlydoor);
@@ -143,7 +185,11 @@ waitForInput(processInput);
 //-------------------------------------------------------
 function Headlibrariansoffice() {
 clear();
-	print("\nYou are in the Head librarian's office");
+
+if (!canBreakSeals) {
+	print("\nYou try to open the door");
+	print("\nBut this time, there is a transparent, glowing orb on the doorknob"); 
+	print("\nIt kind of looks like a magic seal"); 
 	print("\npress enter to leave");
 
 function processInput(input){
@@ -152,11 +198,26 @@ function processInput(input){
 waitForInput(processInput);
 }
 
+if (canBreakSeals) {
+	haveSB = "true";
+	print("\nYou remember what you learned and recite the incantation");
+	print("\nIts a success! The seal breaks with a bubble poping sound");
+	print("\nYou got the spellbook!");
+	print("\nNow leave before anyone finds out");
+	print("\npress enter to leave");
+
+	function processInput(input){
+		 Staffonlydoor();
+	}
+	waitForInput(processInput);
+}
+}
+
 //------------------------------------------------------
-function Storageroom() { 
+function JanitorCloset() { 
 clear();
 
-	print("\nloc: storageroom");
+	print("\nloc: Janitor's Closet");
 	print("\npress enter to leave");
 function processInput(input) {
 	Staffonlydoor();

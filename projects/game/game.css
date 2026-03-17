@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 20px;
-    background-color: #bf9000;
+    background-color: purple;
     font-family: 'Courier New', monospace;
     color: Yellow;
     height: 100vh;
@@ -14,7 +14,7 @@ h1{
 
 .location{
     background-color:aqua;
-    color: #3a2c00;
+    color: purple;
     border-radius:5px;
 }
 
